@@ -1,0 +1,28 @@
+syntax = "v1"
+
+type (
+	// 定义生成建表 SQL 接口的请求体
+	GenerateCreateTableSqlReq {
+		TableName string `json:"table_name"`
+		Delimiter string `json:"delimiter"`
+		Text      string `json:"text"`
+	}
+	// 定义生成建表 SQL 接口的响应体
+	GenerateCreateTableSqlResp {
+		CreateTableSql string `json:"create_table_sql"`
+	}
+)
+
+// 定义 HTTP 服务
+// 微服务名称为 GadgetCrafted，生成的代码目录和配置文件将和 GadgetCrafted 值相关
+service GadgetCrafted {
+	// 定义 http.HandleFunc 转换的 go 文件名称及方法
+	@handler GenerateCreateTableSql
+
+	// 定义生成建表 SQL 的接口
+	// 请求方法为 post
+	// 路由为 /generate_create_table_sql
+	// 请求体为 GenerateCreateTableSqlReq
+	// 响应体为 GenerateCreateTableSqlResp，响应体必须有 returns 关键字修饰
+	post /generate_create_table_sql (GenerateCreateTableSqlReq) returns (GenerateCreateTableSqlResp)
+}

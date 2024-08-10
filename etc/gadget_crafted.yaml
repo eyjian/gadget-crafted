@@ -1,0 +1,11 @@
+Name: GadgetCrafted
+Host: 0.0.0.0
+Port: 2024
+
+Log:
+  Level: debug
+  Mode: console
+  MaxBackups: 10
+  MaxSize: 200
+  Rotation: size
+  Path: log
