@@ -14,7 +14,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/generate_create_table_sql",
+				Path:    "/api/generate_create_table_sql",
 				Handler: GenerateCreateTableSqlHandler(serverCtx),
 			},
 		},

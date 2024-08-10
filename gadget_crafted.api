@@ -18,11 +18,11 @@ type (
 service GadgetCrafted {
 	// 定义 http.HandleFunc 转换的 go 文件名称及方法
 	@handler GenerateCreateTableSql
-
 	// 定义生成建表 SQL 的接口
 	// 请求方法为 post
-	// 路由为 /generate_create_table_sql
+	// 路由为 /api/generate_create_table_sql
 	// 请求体为 GenerateCreateTableSqlReq
 	// 响应体为 GenerateCreateTableSqlResp，响应体必须有 returns 关键字修饰
-	post /generate_create_table_sql (GenerateCreateTableSqlReq) returns (GenerateCreateTableSqlResp)
+	post /api/generate_create_table_sql (GenerateCreateTableSqlReq) returns (GenerateCreateTableSqlResp)
 }
+
