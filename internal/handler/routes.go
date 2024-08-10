@@ -17,6 +17,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/generate_create_table_sql",
 				Handler: GenerateCreateTableSqlHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sql2struct",
+				Handler: Sql2StructHandler(serverCtx),
+			},
 		},
 	)
 }

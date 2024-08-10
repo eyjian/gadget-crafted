@@ -10,3 +10,22 @@ type GenerateCreateTableSqlReq struct {
 type GenerateCreateTableSqlResp struct {
 	CreateTableSql string `json:"create_table_sql"`
 }
+
+type Sql2StructReq struct {
+	Sql               string `json:"sql"`
+	PackageName       string `json:"package_name"`
+	TablePrefix       string `json:"table_prefix"`
+	FieldPrefix       string `json:"field_prefix"`
+	WithGorm          bool   `json:"with_gorm"`            // 是否生成 Gorm tag
+	WithJson          bool   `json:"with_json"`            // 是否生成 Json tag
+	WithDb            bool   `json:"with_db"`              // 是否生成 Db tag
+	WithForm          bool   `json:"with_form"`            // 是否生成 Form tag
+	WithTableNameFunc bool   `json:"with_table_name_func"` // 是否生成 TableName 方法
+	JsonWithPrefix    bool   `json:"json_with_prefix"`     // 生成的 Json tag 时是否添加前缀
+	FormWithPrefix    bool   `json:"form_with_prefix"`     // 生成的 Form tag 时是否添加前缀
+	CustomTags        string `json:"custom_tags"`          // 定制的 tags
+}
+
+type Sql2StructResp struct {
+	Result string `json:"result"`
+}

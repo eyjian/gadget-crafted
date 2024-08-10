@@ -13,6 +13,28 @@ type (
 	}
 )
 
+type (
+	// 定义 sql 转 struct 接口的请求体
+	Sql2StructReq {
+		Sql               string `json:"sql"`
+		PackageName       string `json:"package_name"`
+		TablePrefix       string `json:"table_prefix"`
+		FieldPrefix       string `json:"field_prefix"`
+		WithGorm          bool   `json:"with_gorm"` // 是否生成 Gorm tag
+		WithJson          bool   `json:"with_json"` // 是否生成 Json tag
+		WithDb            bool   `json:"with_db"` // 是否生成 Db tag
+		WithForm          bool   `json:"with_form"` // 是否生成 Form tag
+		WithTableNameFunc bool   `json:"with_table_name_func"` // 是否生成 TableName 方法
+		JsonWithPrefix    bool   `json:"json_with_prefix"` // 生成的 Json tag 时是否添加前缀
+		FormWithPrefix    bool   `json:"form_with_prefix"` // 生成的 Form tag 时是否添加前缀
+		CustomTags        string `json:"custom_tags"` // 定制的 tags
+	}
+	// 定义 sql 转 struct 接口的响应体
+	Sql2StructResp {
+		Result string `json:"result"`
+	}
+)
+
 // 定义 HTTP 服务
 // 微服务名称为 GadgetCrafted，生成的代码目录和配置文件将和 GadgetCrafted 值相关
 service GadgetCrafted {
@@ -24,5 +46,8 @@ service GadgetCrafted {
 	// 请求体为 GenerateCreateTableSqlReq
 	// 响应体为 GenerateCreateTableSqlResp，响应体必须有 returns 关键字修饰
 	post /api/generate_create_table_sql (GenerateCreateTableSqlReq) returns (GenerateCreateTableSqlResp)
+
+	@handler Sql2Struct
+	post /api/sql2struct (Sql2StructReq) returns (Sql2StructResp)
 }
 
