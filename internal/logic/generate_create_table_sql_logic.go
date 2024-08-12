@@ -27,8 +27,7 @@ func NewGenerateCreateTableSqlLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 func (l *GenerateCreateTableSqlLogic) GenerateCreateTableSql(req *types.GenerateCreateTableSqlReq) (resp *types.GenerateCreateTableSqlResp, err error) {
-	// todo: add your logic here and delete this line
-	fmt.Println("===============")
+	fmt.Println("############# GenerateCreateTableSql #############")
 	createTableSql, err := gogcts.GenerateCreateTableSqlFromString(req.TableName, req.Delimiter, req.Text)
 	if err != nil {
 		logc.Errorf(l.ctx, "GenerateCreateTableSqlFromString error: %s", err.Error)

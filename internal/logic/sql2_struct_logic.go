@@ -3,6 +3,7 @@ package logic
 import (
 	"bufio"
 	"context"
+	"fmt"
 	"strings"
 
 	"gadget-crafted/internal/svc"
@@ -27,7 +28,7 @@ func NewSql2StructLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sql2St
 }
 
 func (l *Sql2StructLogic) Sql2Struct(req *types.Sql2StructReq) (resp *types.Sql2StructResp, err error) {
-	// todo: add your logic here and delete this line
+	fmt.Println("############# Sql2Struct #############")
 	sqlTable := s2s.NewSqlTable()
 	sqlTable.PackageName = req.PackageName
 	sqlTable.TablePrefix = req.TablePrefix

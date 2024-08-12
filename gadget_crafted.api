@@ -35,9 +35,16 @@ type (
 	}
 )
 
+@server (
+	// 通过 middileware 关键字声明中间件，多个中间件以英文逗号分割，如 UserAgentMiddleware,LogMiddleware
+	middleware: CorsMiddleware
+)
 // 定义 HTTP 服务
 // 微服务名称为 GadgetCrafted，生成的代码目录和配置文件将和 GadgetCrafted 值相关
 service GadgetCrafted {
+	@handler Sql2Struct
+	post /api/sql2struct (Sql2StructReq) returns (Sql2StructResp)
+
 	// 定义 http.HandleFunc 转换的 go 文件名称及方法
 	@handler GenerateCreateTableSql
 	// 定义生成建表 SQL 的接口
@@ -46,8 +53,5 @@ service GadgetCrafted {
 	// 请求体为 GenerateCreateTableSqlReq
 	// 响应体为 GenerateCreateTableSqlResp，响应体必须有 returns 关键字修饰
 	post /api/generate_create_table_sql (GenerateCreateTableSqlReq) returns (GenerateCreateTableSqlResp)
-
-	@handler Sql2Struct
-	post /api/sql2struct (Sql2StructReq) returns (Sql2StructResp)
 }
 
