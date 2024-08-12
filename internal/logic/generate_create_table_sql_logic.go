@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"gadget-crafted/internal/svc"
@@ -27,13 +26,11 @@ func NewGenerateCreateTableSqlLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 func (l *GenerateCreateTableSqlLogic) GenerateCreateTableSql(req *types.GenerateCreateTableSqlReq) (resp *types.GenerateCreateTableSqlResp, err error) {
-	fmt.Println("############# GenerateCreateTableSql #############")
 	createTableSql, err := gogcts.GenerateCreateTableSqlFromString(req.TableName, req.Delimiter, req.Text)
 	if err != nil {
 		logc.Errorf(l.ctx, "GenerateCreateTableSqlFromString error: %s", err.Error)
 		return nil, err
 	}
-	fmt.Println("*********", createTableSql)
 
 	logc.Debugf(l.ctx, "GenerateCreateTableSqlFromString: %s", createTableSql)
 	return &types.GenerateCreateTableSqlResp{
