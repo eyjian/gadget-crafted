@@ -11,17 +11,32 @@ import (
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/generate_create_table_sql",
-				Handler: GenerateCreateTableSqlHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sql2struct",
-				Handler: Sql2StructHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CorsMiddleware},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/api/generate_create_table_sql",
+					Handler: GenerateCreateTableSqlHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/api/sql2struct",
+					Handler: Sql2StructHandler(serverCtx),
+				},
+				// 添加OPTIONS方法的路由
+				{
+					Method:  http.MethodOptions,
+					Path:    "/api/sql2struct",
+					Handler: func (w http.ResponseWriter, r *http.Request) {
+						w.Header().Set("Access-Control-Allow-Origin", "*")
+						w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+						w.Header().Set("Access-Control-Allow-Headers", "*")
+						w.Header().Set("Access-Control-Allow-Credentials", "true")
+						w.WriteHeader(http.StatusNoContent)
+					},
+				},
+			}...,
+		),
 	)
 }
