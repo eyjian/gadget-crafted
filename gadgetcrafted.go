@@ -2,7 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
+	"os"
 
 	"gadget-crafted/internal/config"
 	"gadget-crafted/internal/handler"
@@ -20,12 +21,23 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 
-	server := rest.MustNewServer(c.RestConf, rest.WithCors())
-	defer server.Stop()
-
 	ctx := svc.NewServiceContext(c)
+	if !ctx.Init() {
+		os.Exit(2)
+	}
+
+	var server *rest.Server
+	if c.Cors == 1 {
+		logx.Info("enable cors")
+		server = rest.MustNewServer(c.RestConf, rest.WithCors())
+	} else {
+		logx.Info("disable cores")
+		server = rest.MustNewServer(c.RestConf)
+	}
+
+	defer server.Stop()
 	handler.RegisterHandlers(server, ctx)
 
-	fmt.Printf("Starting gadget_crafted server at %s:%d...\n", c.Host, c.Port)
+	logx.Infof("Starting gadget_crafted server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }

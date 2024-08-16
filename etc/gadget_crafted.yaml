@@ -1,6 +1,7 @@
 Name: GadgetCrafted
 Host: 0.0.0.0
 Port: 2024
+Cors: 0
 
 Log:
   Level: debug

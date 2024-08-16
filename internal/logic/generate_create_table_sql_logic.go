@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"gadget-crafted/internal/model"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"gadget-crafted/internal/svc"
@@ -25,7 +26,16 @@ func NewGenerateCreateTableSqlLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-func (l *GenerateCreateTableSqlLogic) GenerateCreateTableSql(req *types.GenerateCreateTableSqlReq) (resp *types.GenerateCreateTableSqlResp, err error) {
+func (l *GenerateCreateTableSqlLogic) GenerateCreateTableSql(userIp string, req *types.GenerateCreateTableSqlReq) (*types.GenerateCreateTableSqlResp, error) {
+	db := l.svcCtx.Db.WithContext(l.ctx)
+	err := db.Create(&model.FeatureUsage{
+		UserIp:  "",
+		Feature: "GenerateCreateTableSql",
+	}).Error
+	if err != nil {
+		logc.Errorf(l.ctx, "log usage of feature error: %s", err.Error())
+	}
+
 	createTableSql, err := gogcts.GenerateCreateTableSqlFromString(req.TableName, req.Delimiter, req.Text)
 	if err != nil {
 		logc.Errorf(l.ctx, "GenerateCreateTableSqlFromString error: %s", err.Error())

@@ -17,8 +17,9 @@ func Sql2StructHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
+		userIp := GetUserIp(r)
 		l := logic.NewSql2StructLogic(r.Context(), svcCtx)
-		resp, err := l.Sql2Struct(&req)
+		resp, err := l.Sql2Struct(userIp, &req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

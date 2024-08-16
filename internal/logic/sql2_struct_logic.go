@@ -3,6 +3,8 @@ package logic
 import (
 	"bufio"
 	"context"
+	"gadget-crafted/internal/model"
+	"github.com/zeromicro/go-zero/core/logc"
 	"strings"
 
 	"gadget-crafted/internal/svc"
@@ -26,7 +28,16 @@ func NewSql2StructLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sql2St
 	}
 }
 
-func (l *Sql2StructLogic) Sql2Struct(req *types.Sql2StructReq) (resp *types.Sql2StructResp, err error) {
+func (l *Sql2StructLogic) Sql2Struct(userIp string, req *types.Sql2StructReq) (*types.Sql2StructResp, error) {
+	db := l.svcCtx.Db.WithContext(l.ctx)
+	err := db.Create(&model.FeatureUsage{
+		UserIp:  "",
+		Feature: "Sql2Struct",
+	}).Error
+	if err != nil {
+		logc.Errorf(l.ctx, "log usage of feature error: %s", err.Error())
+	}
+
 	sqlTable := s2s.NewSqlTable()
 	sqlTable.PackageName = req.PackageName
 	sqlTable.TablePrefix = req.TablePrefix

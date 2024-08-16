@@ -6,6 +6,8 @@ require (
 	github.com/eyjian/gadget-basecamp/gcts/gogcts v0.0.5
 	github.com/eyjian/sql2struct/s2s v0.0.3
 	github.com/zeromicro/go-zero v1.7.0
+	gorm.io/driver/sqlite v1.5.6
+	gorm.io/gorm v1.25.11
 )
 
 require (
@@ -18,8 +20,11 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mattn/go-sqlite3 v1.14.22 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/prometheus/client_golang v1.19.1 // indirect
