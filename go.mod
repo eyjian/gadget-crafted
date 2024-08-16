@@ -4,7 +4,7 @@ go 1.21.5
 
 require (
 	github.com/eyjian/gadget-basecamp/gcts/gogcts v0.0.5
-	github.com/eyjian/sql2struct/s2s v0.0.1
+	github.com/eyjian/sql2struct/s2s v0.0.3
 	github.com/zeromicro/go-zero v1.7.0
 )
 
