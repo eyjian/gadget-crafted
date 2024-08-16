@@ -31,7 +31,7 @@ func NewSql2StructLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sql2St
 func (l *Sql2StructLogic) Sql2Struct(userIp string, req *types.Sql2StructReq) (*types.Sql2StructResp, error) {
 	db := l.svcCtx.Db.WithContext(l.ctx)
 	err := db.Create(&model.FeatureUsage{
-		UserIp:  "",
+		UserIp:  userIp,
 		Feature: "Sql2Struct",
 	}).Error
 	if err != nil {

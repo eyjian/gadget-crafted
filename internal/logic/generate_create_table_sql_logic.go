@@ -29,7 +29,7 @@ func NewGenerateCreateTableSqlLogic(ctx context.Context, svcCtx *svc.ServiceCont
 func (l *GenerateCreateTableSqlLogic) GenerateCreateTableSql(userIp string, req *types.GenerateCreateTableSqlReq) (*types.GenerateCreateTableSqlResp, error) {
 	db := l.svcCtx.Db.WithContext(l.ctx)
 	err := db.Create(&model.FeatureUsage{
-		UserIp:  "",
+		UserIp:  userIp,
 		Feature: "GenerateCreateTableSql",
 	}).Error
 	if err != nil {

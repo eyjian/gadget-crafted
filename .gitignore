@@ -25,6 +25,7 @@ go.sum
 # env file
 .env
 
+.DS_Store
 gadget_crafted.db
 gadget_crafted_service
 gadget_crafted_client
