@@ -6,9 +6,11 @@ CLIENT=gadget_crafted_client
 ALL: ${TARGET} ${CLIENT}
 
 ${TARGET}: gadgetcrafted.go
+	go mod tidy
 	go build -o $@ $<
 
 ${CLIENT}: gadget_crafted_client.go
+	go mod tidy
 	go build -o $@ $<
 
 api: gadget_crafted.api
